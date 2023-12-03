@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  zap2it:
+    container_name: ghcr.io/itsamenathan/zap2it:main
+    image: zap2it
+    volumes:
+      - ./data:/data
+    environment:
+      CONFIGFILE: "/data/zap2itconfig.ini"
+      OUTPUTFILE: "/data/xmlguide.xmltv"
+      HEALTHCHECK_URL: "https://hc-ping.com/UUID" # CHANGE ME
+    user: "1000:1000"
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    restart: always
+    depends_on:
+      - zap2it
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-run.zap2it.schedule: "@every 12h"
+      ofelia.job-run.zap2it.Container: "zap2it"

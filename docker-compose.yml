@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  zap2it:
+    container_name: zap2it
+    image: ghcr.io/itsamenathan/zap2it:main
+    volumes:
+      - ./data:/data
+    environment:
+      CONFIGFILE: "/data/zap2itconfig.ini"
+      OUTPUTFILE: "/data/xmlguide.xmltv"
+      HEALTHCHECK_URL: "https://hc-ping.com/UUID" # CHANGE ME
+    user: "1000:1000"
