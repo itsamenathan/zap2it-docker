@@ -6,7 +6,7 @@ This is a docker image for running [daniel-widrick/zap2it-GuideScraping](https:/
 * Running of zap2it-GuideScrape.py
 * Docker Compose examples
 * Removal of historical xmlguide files
-* Healthcheck.io integration
+* [Healthcheck.io](https://healthchecks.io) integration
 * Run once, or forever based on sleep time
 
 ## Environment Variables Options
@@ -24,6 +24,10 @@ This is a docker image for running [daniel-widrick/zap2it-GuideScraping](https:/
   * default: `undefined`
 
 ## Running
+
+1. Create a `zap2itconfig.ini` file.  Check [daniel-widrick/zap2it-GuideScraping's](https://github.com/daniel-widrick/zap2it-GuideScraping) repo for more info on that. 
+1. Make sure your output directory exists.  I `/data` for example.
+1. Run the thing
 
 ### Only Once
 
