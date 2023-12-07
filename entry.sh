@@ -5,8 +5,8 @@ output_file="${OUTPUTFILE:-/data/xmlguide.xmltv}"
 output_dir="$(dirname "$output_file")"
 date_format="%Y-%m-%d %H:%M:%S %Z"
 
-# Ping a healthcheck.io endpoint
-healthcheck_io() {
+# Ping a healthchecks.io endpoint
+healthchecks_io() {
   [ "$1" ] && local url_path="/${1}" || local url_path=""
   if [ "$HEALTHCHECK_URL" ]; then
     curl -fsS -m 10 --retry 5 -o /dev/null "$HEALTHCHECK_URL$url_path"
@@ -29,6 +29,9 @@ validate() {
 }
 
 zap2it() {
+  # Ping healthchecks.io/start
+  healthchecks_io "start"
+
   echo "Started: $(date +"$date_format")"
 
   # Run script
@@ -41,29 +44,33 @@ zap2it() {
 
   # remove historical files
   rm "$output_dir"/xmlguide.2*.xmltv
+
+  # Ping healthchecks.io
+  healthchecks_io
 }
 
 main() {
+  # Validate input
+  validate
+
   # Loop if sleeptime is defined
   if [ "$SLEEPTIME" ]; then
     while true; do
       echo "Running zap2it"
+
       zap2it
 
       echo "Next: $(date +"$date_format" -d "+$SLEEPTIME seconds")"
 
       # sleep until next run
       sleep "$SLEEPTIME"
+
     done
   else
     echo "Running zap2it"
     zap2it
   fi
-
 }
 
 # Run the scripts functions
-healthcheck_io "start"
-validate
 main
-healthcheck_io
