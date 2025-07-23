@@ -25,25 +25,24 @@ This is a docker image for running [daniel-widrick/zap2it-GuideScraping](https:/
 
 ## Running
 
-1. Create a `zap2itconfig.ini` file.  Check [daniel-widrick/zap2it-GuideScraping's](https://github.com/daniel-widrick/zap2it-GuideScraping) repo for more info on that. 
-1. Make sure your output directory exists.  I `/data` for example.
-1. Run the thing
+1. Create a `zap2itconfig.ini` file. Check [daniel-widrick/zap2it-GuideScraping's](https://github.com/daniel-widrick/zap2it-GuideScraping) repo for more info on that.
+2. Make sure your output directory exists. For example, `/data`.
+3. Run the container.
 
 ### Only Once
 
 #### docker cli
-``` bash
-docker run
-  -v $(PWD)/data:/data
-  -e CONFIGFILE=/data/zap2itconfig.ini
-  -e OUTPUTFILE=/data/xmlguide.xmltv
-  -e HEALTHCHECK_URL=https://hc-ping.com/UUID
-  --user 1000:1000
+```bash
+docker run \
+  -v $(pwd)/data:/data \
+  -e CONFIGFILE=/data/zap2itconfig.ini \
+  -e OUTPUTFILE=/data/xmlguide.xmltv \
+  -e HEALTHCHECK_URL=https://hc-ping.com/UUID \
+  --user 1000:1000 \
   ghcr.io/itsamenathan/zap2it:main
 ```
 #### docker-compose.yml
-
-``` yml
+```yml
 version: '3'
 services:
   zap2it:
@@ -62,19 +61,18 @@ services:
 The only difference is adding the `SLEEPTIME` variable.
 
 #### docker cli
-``` bash
-docker run
-  -v $(PWD)/data:/data
-  -e CONFIGFILE=/data/zap2itconfig.ini
-  -e OUTPUTFILE=/data/xmlguide.xmltv
-  -e HEALTHCHECK_URL=https://hc-ping.com/UUID
-  -e SLEEPTIME=43200
-  --user 1000:1000
+```bash
+docker run \
+  -v $(pwd)/data:/data \
+  -e CONFIGFILE=/data/zap2itconfig.ini \
+  -e OUTPUTFILE=/data/xmlguide.xmltv \
+  -e HEALTHCHECK_URL=https://hc-ping.com/UUID \
+  -e SLEEPTIME=43200 \
+  --user 1000:1000 \
   ghcr.io/itsamenathan/zap2it:main
 ```
 #### docker-compose.yml
-
-``` yml
+```yml
 version: '3'
 services:
   zap2it:
