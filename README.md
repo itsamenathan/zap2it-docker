@@ -39,14 +39,14 @@ docker run \
   -e OUTPUTFILE=/data/xmlguide.xmltv \
   -e HEALTHCHECK_URL=https://hc-ping.com/UUID \
   --user 1000:1000 \
-  ghcr.io/itsamenathan/zap2it:main
+  ghcr.io/itsamenathan/zap2it-docker:main
 ```
 #### docker-compose.yml
 ```yml
 version: '3'
 services:
   zap2it:
-    image: ghcr.io/itsamenathan/zap2it:main
+    image: ghcr.io/itsamenathan/zap2it-docker:main
     volumes:
       - ./data:/data
     environment:
@@ -69,14 +69,14 @@ docker run \
   -e HEALTHCHECK_URL=https://hc-ping.com/UUID \
   -e SLEEPTIME=43200 \
   --user 1000:1000 \
-  ghcr.io/itsamenathan/zap2it:main
+  ghcr.io/itsamenathan/zap2it-docker:main
 ```
 #### docker-compose.yml
 ```yml
 version: '3'
 services:
   zap2it:
-    image: ghcr.io/itsamenathan/zap2it:main
+    image: ghcr.io/itsamenathan/zap2it-docker:main
     volumes:
       - ./data:/data
     environment:
